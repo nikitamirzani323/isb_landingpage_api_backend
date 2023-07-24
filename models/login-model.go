@@ -5,7 +5,6 @@ import (
 	"database/sql"
 	"errors"
 	"fmt"
-	"log"
 
 	"github.com/nikitamirzani323/isb_landingpage_api/configs"
 	"github.com/nikitamirzani323/isb_landingpage_api/db"
@@ -13,7 +12,7 @@ import (
 	"github.com/nleeper/goment"
 )
 
-func Login_Model(username, password, ipaddress, timezone string) (bool, string, error) {
+func Login_Model(username, password, ipaddress string) (bool, string, error) {
 	con := db.CreateCon()
 	ctx := context.Background()
 	flag := false
@@ -47,24 +46,23 @@ func Login_Model(username, password, ipaddress, timezone string) (bool, string, 
 	if flag {
 		sql_update := `
 			UPDATE ` + configs.DB_tbl_admin + ` 
-			SET lastlogin=$1, ipaddress=$2 , timezone=$3, 
-			updateadmin=$4,  updatedateadmin=$5  
-			WHERE username  = $6 
+			SET lastlogin=$1, ipaddress=$2,  
+			updateadmin=$3,  updatedateadmin=$4   
+			WHERE username  = $5 
 			AND statuslogin = 'Y' 
 		`
 		flag_update, msg_update := Exec_SQL(sql_update, configs.DB_tbl_admin, "UPDATE",
 			tglnow.Format("YYYY-MM-DD HH:mm:ss"),
 			ipaddress,
-			timezone,
 			username,
 			tglnow.Format("YYYY-MM-DD HH:mm:ss"),
 			username)
 
 		if flag_update {
 			flag = true
-			log.Println(msg_update)
+			fmt.Println(msg_update)
 		} else {
-			log.Println(msg_update)
+			fmt.Println(msg_update)
 		}
 	}
 

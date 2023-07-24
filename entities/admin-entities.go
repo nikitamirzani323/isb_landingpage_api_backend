@@ -5,7 +5,6 @@ type Model_admin struct {
 	Nama          string `json:"admin_nama"`
 	Rule          string `json:"admin_rule"`
 	Joindate      string `json:"admin_joindate"`
-	Timezone      string `json:"admin_timezone"`
 	Lastlogin     string `json:"admin_lastlogin"`
 	LastIpaddress string `json:"admin_lastipaddres"`
 	Status        string `json:"admin_status"`

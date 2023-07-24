@@ -28,7 +28,7 @@ func Fetch_adminHome() (helpers.ResponseAdmin, error) {
 	sql_select := `SELECT 
 			username , name, idadmin,
 			statuslogin, to_char(COALESCE(lastlogin,now()), 'YYYY-MM-DD HH24:MI:SS'), joindate, 
-			ipaddress, timezone  
+			ipaddress   
 			FROM ` + database_admin_local + ` 
 			ORDER BY lastlogin DESC 
 		`
@@ -40,14 +40,14 @@ func Fetch_adminHome() (helpers.ResponseAdmin, error) {
 	for row.Next() {
 		no += 1
 		var (
-			username_db, name_db, idadminlevel_db                                string
-			statuslogin_db, lastlogin_db, joindate_db, ipaddress_db, timezone_db string
+			username_db, name_db, idadminlevel_db                   string
+			statuslogin_db, lastlogin_db, joindate_db, ipaddress_db string
 		)
 
 		err = row.Scan(
 			&username_db, &name_db, &idadminlevel_db,
 			&statuslogin_db, &lastlogin_db, &joindate_db,
-			&ipaddress_db, &timezone_db)
+			&ipaddress_db)
 
 		helpers.ErrorCheck(err)
 		if statuslogin_db == "Y" {
@@ -60,7 +60,6 @@ func Fetch_adminHome() (helpers.ResponseAdmin, error) {
 		obj.Nama = name_db
 		obj.Rule = idadminlevel_db
 		obj.Joindate = joindate_db
-		obj.Timezone = timezone_db
 		obj.Lastlogin = lastlogin_db
 		obj.LastIpaddress = ipaddress_db
 		obj.Status = statuslogin_db

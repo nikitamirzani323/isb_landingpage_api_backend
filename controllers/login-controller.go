@@ -40,7 +40,7 @@ func CheckLogin(c *fiber.Ctx) error {
 		})
 	}
 
-	result, ruleadmin, err := models.Login_Model(client.Username, client.Password, client.Ipaddress, client.Timezone)
+	result, ruleadmin, err := models.Login_Model(client.Username, client.Password, client.Ipaddress)
 
 	if err != nil {
 		c.Status(fiber.StatusBadRequest)

@@ -30,7 +30,6 @@ func Adminhome(c *fiber.Ctx) error {
 		admin_nama, _ := jsonparser.GetString(value, "admin_nama")
 		admin_rule, _ := jsonparser.GetString(value, "admin_rule")
 		admin_joindate, _ := jsonparser.GetString(value, "admin_joindate")
-		admin_timezone, _ := jsonparser.GetString(value, "admin_timezone")
 		admin_lastlogin, _ := jsonparser.GetString(value, "admin_lastlogin")
 		admin_lastipaddres, _ := jsonparser.GetString(value, "admin_lastipaddres")
 		admin_status, _ := jsonparser.GetString(value, "admin_status")
@@ -39,7 +38,6 @@ func Adminhome(c *fiber.Ctx) error {
 		obj.Admin_nama = admin_nama
 		obj.Admin_rule = admin_rule
 		obj.Admin_joindate = admin_joindate
-		obj.Admin_timezone = admin_timezone
 		obj.Admin_lastlogin = admin_lastlogin
 		obj.Admin_lastipaddres = admin_lastipaddres
 		obj.Admin_status = admin_status
