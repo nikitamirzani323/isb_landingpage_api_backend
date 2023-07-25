@@ -117,9 +117,7 @@ func Save_domain(admin, nmdomain, status, sData string, idrecord int) (helpers.R
 
 		flag_update, msg_update := Exec_SQL(sql_update, database_domain_local, "UPDATE",
 			nmdomain, status,
-			admin,
-			tglnow.Format("YYYY-MM-DD HH:mm:ss"),
-			idrecord)
+			admin, tglnow.Format("YYYY-MM-DD HH:mm:ss"), idrecord)
 
 		if flag_update {
 			flag = true

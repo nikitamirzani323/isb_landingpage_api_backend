@@ -74,12 +74,13 @@ func DeleteRedis(key string) int {
 	dbHost := os.Getenv("DB_REDIS_HOST") + ":" + os.Getenv("DB_REDIS_PORT")
 	dbPass := os.Getenv("DB_REDIS_PASSWORD")
 	dbName, _ := strconv.Atoi(os.Getenv("DB_REDIS_NAME"))
-
+	value := 0
 	rdb := redis.NewClient(&redis.Options{
 		Addr:     dbHost,
 		Password: dbPass,
 		DB:       dbName,
 	})
+	value = int(rdb.Del(ctx, key).Val())
 	rdb.Close()
-	return int(rdb.Del(ctx, key).Val())
+	return value
 }
